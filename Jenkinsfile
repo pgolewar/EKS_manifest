@@ -5,6 +5,7 @@ pipeline {
       steps {
         echo 'Hello world!_1st commit'
         sh "mkdir demo"
+        sh "touch text.txt"
        
       }
     }
