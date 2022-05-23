@@ -4,8 +4,8 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Hello world!_1st commit'
-        bat "cd /.jenkins"
-        bat "mkdir demo"
+        sh "cd /.jenkins"
+        sh "mkdir demo"
        
       }
     }
