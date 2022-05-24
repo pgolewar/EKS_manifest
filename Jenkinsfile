@@ -20,11 +20,13 @@ pipeline{
 				echo "JOB_NAME - $env.JOB_NAME"
 			}
 		}
-        stage('Build '){
-            steps{
-                echo "Build"
-				}
-				} 
+        
+	stage('Checkout code') {
+        steps {
+            checkout scm
+             }
+         }
+				
             
         
 		stage('Push Frontend'){
