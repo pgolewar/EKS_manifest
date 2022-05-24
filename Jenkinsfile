@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pipeline{
     agent any
     environment {
@@ -7,7 +8,7 @@ pipeline{
         IMAGE_TAG="latest"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
                  }
-	 stages{
+	stages{
 		stage('Checkout'){
 			steps{
 				sh 'mvn --version'
@@ -25,8 +26,8 @@ pipeline{
                 echo "Build"
 				}
 				} 
-            }
-        }
+            
+        
 		stage('Push Frontend'){
 			steps{
 				echo "Push"
@@ -49,3 +50,5 @@ pipeline{
 	
 
 }
+
+
