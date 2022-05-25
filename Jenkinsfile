@@ -21,9 +21,16 @@ pipeline{
 			}
 		}
         
-	stage('Cloning Git') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/pgolewar/EKS_manifest.git']]])     
+	stage('Build '){
+            steps{
+                dir('./coit-frontend'){
+				echo "path- $PATH"
+				script{
+				def FRONTENDDOCKER = 'Dockerfile-multistage'
+				DockerFrontend = docker.build("pgolewar/EKS_manifest:${env.BUILD_TAG}","-f ${FRONTENDDOCKER} .")
+				//sh('docker build -t kollidatta/coitfrontend:v1 -f Dockerfile-multistage .')
+				}
+				} 
             }
         }
 				
