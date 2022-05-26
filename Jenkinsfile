@@ -23,11 +23,11 @@ pipeline{
         
 	stage('Build '){
             steps{
-                dir('./coit-backend1'){
+                dir('./coit-frontend'){
 				echo "path- $PATH"
 				script{
 				def FRONTENDDOCKER = 'Dockerfile-multistage'
-				DockerFrontend = docker.build("eks_manifest/coit-backend1:${env.BUILD_TAG}","-f ${FRONTENDDOCKER} .")
+				DockerFrontend = docker.build("eks_manifest/frontend:${env.BUILD_TAG}","-f ${FRONTENDDOCKER} .")
 				//sh('docker build -t kollidatta/coitfrontend:v1 -f Dockerfile-multistage .')
 				}
 				} 
