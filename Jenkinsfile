@@ -27,7 +27,7 @@ pipeline{
 				echo "path- $PATH"
 				script{
 				def FRONTENDDOCKER = 'Dockerfile-multistage'
-				DockerFrontend = docker.build("eks_manifest/frontend:${env.BUILD_TAG}","-f ${FRONTENDDOCKER} .")
+				DockerFrontend = docker.build("eks_manifest/coit-frontend:${env.BUILD_TAG}","-f ${FRONTENDDOCKER} .")
 				//sh('docker build -t kollidatta/coitfrontend:v1 -f Dockerfile-multistage .')
 				}
 				} 
