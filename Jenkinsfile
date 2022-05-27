@@ -44,6 +44,56 @@ pipeline{
 
 			}
 		}
+
+
+		stage('Build '){
+            steps{
+                dir('./coit-backend1'){
+				echo "path- $PATH"
+				script{
+				def backend1 = 'Dockerfile-multistage'
+				DockerBackend1 = docker.build("coit-backend1:${env.BUILD_TAG}","-f ${backend1} .")
+				//sh('docker build -t kollidatta/coitfrontend:v1 -f Dockerfile-multistage .')
+				}
+				} 
+            }
+        }
+				
+            
+        
+		stage('Push backend1'){
+			steps{
+				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+				sh "docker tag coit-backend1:${env.BUILD_TAG} ${REPOSITORY_URI}:${env.BUILD_TAG}"
+                sh "docker push ${REPOSITORY_URI}:${env.BUILD_TAG}"
+
+			}
+		}
+
+
+		stage('backend2 '){
+            steps{
+                dir('./coit-backend2'){
+				echo "path- $PATH"
+				script{
+				def backend2 = 'Dockerfile'
+				DockerBackend2 = docker.build("coit-backend2:${env.BUILD_TAG}","-f ${backend2} .")
+				//sh('docker build -t kollidatta/coitfrontend:v1 -f Dockerfile-multistage .')
+				}
+				} 
+            }
+        }
+				
+            
+        
+		stage('Push backend2'){
+			steps{
+				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+				sh "docker tag coit-backend2:${env.BUILD_TAG} ${REPOSITORY_URI}:${env.BUILD_TAG}"
+                sh "docker push ${REPOSITORY_URI}:${env.BUILD_TAG}"
+
+			}
+		}
 		
     }
 	post {
