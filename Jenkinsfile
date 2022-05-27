@@ -40,7 +40,7 @@ pipeline{
 			steps{
 				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
 				sh "docker tag coit-frontend:${env.BUILD_TAG} ${REPOSITORY_URI}/coit-frontend:${env.BUILD_TAG}"
-                sh "docker push ${REPOSITORY_URI}/coit-frontend:${env.BUILD_TAG}"
+                sh "docker push ${REPOSITORY_URI}:${env.BUILD_TAG}"
 
 			}
 		}
