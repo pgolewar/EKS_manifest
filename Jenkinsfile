@@ -38,6 +38,7 @@ pipeline{
         
 		stage('Push Frontend'){
 			steps{
+				sh 'https://docs.docker.com/engine/reference/commandline/login/#credentials-store'
 				sh 'docker tag coit-frontend 273488666711.dkr.ecr.us-east-1.amazonaws.com/coit_repository'
 				 sh 'docker push 273488666711.dkr.ecr.us-east-1.amazonaws.com/coit_repository'
 
