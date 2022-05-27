@@ -27,7 +27,7 @@ pipeline{
 				echo "path- $PATH"
 				script{
 				def FRONTENDDOCKER = 'Dockerfile-multistage'
-				DockerFrontend = docker.build("coit-frontend:${env.BUILD_TAG}","-f ${FRONTENDDOCKER} .")
+				DockerFrontend = docker.build("coit-frontend:Frontend-${env.BUILD_TAG}","-f ${FRONTENDDOCKER} .")
 				//sh('docker build -t kollidatta/coitfrontend:v1 -f Dockerfile-multistage .')
 				}
 				} 
@@ -39,8 +39,8 @@ pipeline{
 		stage('Push Frontend'){
 			steps{
 				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-				sh "docker tag coit-frontend:${env.BUILD_TAG} ${REPOSITORY_URI}:${env.BUILD_TAG}"
-                sh "docker push ${REPOSITORY_URI}:${env.BUILD_TAG}"
+				sh "docker tag coit-frontend:Frontend-${env.BUILD_TAG} ${REPOSITORY_URI}:Frontend-${env.BUILD_TAG}"
+                sh "docker push ${REPOSITORY_URI}:Frontend-${env.BUILD_TAG}"
 
 			}
 		}
