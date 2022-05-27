@@ -38,9 +38,9 @@ pipeline{
         
 		stage('Push Frontend'){
 			steps{
-				sh 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-1 ) 273488666711.dkr.ecr.us-east-1.amazonaws.com'
-				sh 'docker tag coit-frontend 273488666711.dkr.ecr.us-east-1.amazonaws.com/coit_repository'
-				 sh 'docker push 273488666711.dkr.ecr.us-east-1.amazonaws.com/coit_repository'
+				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+				sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+                sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
 
 			}
 		}
