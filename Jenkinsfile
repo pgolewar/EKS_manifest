@@ -21,7 +21,7 @@ pipeline{
 			}
 		}
         
-	 stage('Build '){
+	 stage('coit-frontend Build '){
             steps{
                 dir('./coit-frontend'){
 				echo "path- $PATH"
@@ -46,7 +46,7 @@ pipeline{
 		}
 
 
-		stage('Build '){
+		stage('coit-backend1 Build '){
             steps{
                 dir('./coit-backend1'){
 				echo "path- $PATH"
@@ -71,7 +71,7 @@ pipeline{
 		}
 
 
-		stage('backend2 '){
+		stage('backend2 Build '){
             steps{
                 dir('./coit-backend2'){
 				echo "path- $PATH"
