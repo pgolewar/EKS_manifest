@@ -21,7 +21,7 @@ pipeline{
 			}
 		}
         
-	/* stage('Build '){
+	 stage('Build '){
             steps{
                 dir('./coit-frontend'){
 				echo "path- $PATH"
@@ -33,17 +33,17 @@ pipeline{
 				} 
             }
         }
-	*/			
+				
             
         
-		stage('Push Frontend'){
-			steps{
-				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-				sh "docker tag coit-frontend:${IMAGE_TAG} ${REPOSITORY_URI}"
-                sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/coit-frontend"
+		// stage('Push Frontend'){
+		// 	steps{
+		// 		sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+		// 		sh "docker tag eks_manifest/coit-frontend:${env.BUILD_TAG}:${IMAGE_TAG} ${REPOSITORY_URI}"
+        //         sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/coit-frontend:${IMAGE_TAG}"
 
-			}
-		}
+		// 	}
+		// }
 		
     }
 	post {
